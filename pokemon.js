@@ -1,0 +1,24 @@
+//pokemon project
+
+async function fetchData(){
+    try{
+
+        const pokemonName = document.getElementById("pokemonName").value.toLowerCase();
+
+        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+
+        if (!response.ok){
+            throw new Error("Couldnt fetch resource!");
+        }
+        const data = await response.json();     
+
+        const pokemonSprite = data.sprites.front_default;   //img from api to b inserted
+        const imgElement = document.getElementById("pokemonSprite"); //img from html
+
+        imgElement.src =pokemonSprite;
+        imgElement.style.display="block";
+    }
+    catch(error){
+        console.error(error);
+    }
+}
